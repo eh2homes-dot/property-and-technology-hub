@@ -1,0 +1,13 @@
+{
+  // Cloudflare deploy settings for the hub.
+  // Only the files inside public/ are published. Anything else in this repo
+  // (README, this file, notes) stays out of the live site.
+  "name": "property-and-technology-hub",
+  "compatibility_date": "2026-11-13",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "./public"
+  }
+}
