@@ -138,7 +138,13 @@
     line-height:1.5;
     color:var(--ink-soft);
   }
-  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;align-items:center;}
+  .signup{margin-top:30px;max-width:440px;}
+  .signup-form{min-height:52px;max-width:100%;}
+  .signup-form iframe{max-width:100%;}
+  .signup-form.is-empty{min-height:0;}
+  .signup-fallback[hidden]{display:none;}
+  .signup-note{margin-top:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;color:var(--ink-dim);}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px;align-items:center;}
   .btn{
     display:inline-flex;align-items:center;gap:8px;
     font-family:var(--mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;
@@ -290,6 +296,8 @@
 
   Newsletter (Origins) ... https://evanprothro-newsletter.beehiiv.com/
   Subscribe ............... https://evanprothro-newsletter.beehiiv.com/subscribe
+  Signup form (hero) ...... beehiiv form aab7595e-e526-48b0-9a03-d73693bc2a16
+                            edit its look in beehiiv: Subscribers > Subscribe forms
   Jobs (Founders & Friends) https://www.propertyandtechnologyjobs.com/
   Syndeo .................. https://syndeo-main-page.eh2homes.workers.dev/
   YouTube ................. https://www.youtube.com/@PropertyandTechnologyMedia
@@ -333,8 +341,15 @@
   <div class="eyebrow">Property and Technology</div>
   <h1>Who's hiring and who's moving in <span class="grad">scattered site rental operations</span> and proptech.</h1>
   <p class="sub">We run the Origins newsletter, the Founders &amp; Friends job board, and Syndeo, an invite-only community for founders and CEOs.</p>
+  <div class="signup">
+    <div class="signup-form" id="signup-form">
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="aab7595e-e526-48b0-9a03-d73693bc2a16"></script>
+      <noscript><a class="btn primary" href="https://evanprothro-newsletter.beehiiv.com/subscribe?utm_source=propertyandtechnology&amp;utm_medium=hub&amp;utm_campaign=hero" target="_blank" rel="noopener noreferrer">Get Origins every Wednesday &rarr;</a></noscript>
+    </div>
+    <a class="btn primary signup-fallback" id="signup-fallback" hidden href="https://evanprothro-newsletter.beehiiv.com/subscribe?utm_source=propertyandtechnology&amp;utm_medium=hub&amp;utm_campaign=hero" target="_blank" rel="noopener noreferrer">Get Origins every Wednesday &rarr;</a>
+    <p class="signup-note">One email, every Wednesday.</p>
+  </div>
   <div class="hero-actions">
-    <a class="btn primary" href="https://evanprothro-newsletter.beehiiv.com/subscribe?utm_source=propertyandtechnology&amp;utm_medium=hub&amp;utm_campaign=hero" target="_blank" rel="noopener noreferrer">Get Origins every Wednesday &rarr;</a>
     <a class="btn ghost-green" href="https://www.propertyandtechnologyjobs.com/?utm_source=propertyandtechnology&amp;utm_medium=hub&amp;utm_campaign=hero" target="_blank" rel="noopener noreferrer">Browse 2,000+ open roles</a>
   </div>
 </section>
@@ -449,6 +464,20 @@
     <div class="fmeta"><span>Property and Technology &middot; 2026</span></div>
   </div>
 </footer>
+
+<script>
+  /* If the beehiiv form has not drawn after a few seconds (ad blocker, network),
+     show a plain button that opens the subscribe page instead. */
+  (function () {
+    var box = document.getElementById('signup-form');
+    var fallback = document.getElementById('signup-fallback');
+    if (!box || !fallback) return;
+    setTimeout(function () {
+      var drawn = box.querySelector('iframe, form, input');
+      if (!drawn) { box.classList.add('is-empty'); fallback.hidden = false; }
+    }, 4000);
+  })();
+</script>
 
 </body>
 </html>
